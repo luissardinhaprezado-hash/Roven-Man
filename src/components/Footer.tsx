@@ -1,4 +1,4 @@
-import Link from "next/link"
+﻿import Link from "next/link"
 
 export default function Footer() {
   return (
@@ -10,7 +10,7 @@ export default function Footer() {
               ROVEN <span className="text-amber-500">MAN</span>
             </h3>
             <p className="text-zinc-400 text-sm leading-relaxed">
-              Moda masculina premium com estilo contemporâneo. Qualidade, conforto e design pensados para o homem moderno.
+              Moda masculina premium com estilo contemporÃ¢neo. Qualidade, conforto e design pensados para o homem moderno.
             </p>
           </div>
 
@@ -26,7 +26,7 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4 text-sm tracking-wider">AJUDA</h4>
             <ul className="space-y-2 text-sm text-zinc-400">
-              <li><Link href="/envios" className="hover:text-white transition">Envios e devoluções</Link></li>
+              <li><Link href="/envios" className="hover:text-white transition">Envios e devoluÃ§Ãµes</Link></li>
               <li><Link href="/contacto" className="hover:text-white transition">Contacto</Link></li>
               <li><Link href="/faq" className="hover:text-white transition">FAQ</Link></li>
               <li><Link href="/admin" className="hover:text-white transition">Admin</Link></li>
@@ -35,7 +35,7 @@ export default function Footer() {
 
           <div>
             <h4 className="font-semibold mb-4 text-sm tracking-wider">NEWSLETTER</h4>
-            <p className="text-zinc-400 text-sm mb-3">Recebe novidades e lançamentos da ROVEN MAN.</p>
+            <p className="text-zinc-400 text-sm mb-3">Recebe novidades e lanÃ§amentos da ROVEN MAN.</p>
             <form className="flex gap-2">
               <input
                 type="email"
@@ -53,10 +53,10 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-zinc-800 mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-zinc-500">
-          <p>© 2026 ROVEN MAN. Todos os direitos reservados.</p>
+          <p>Â© 2026 ROVEN MAN. Todos os direitos reservados.</p>
           <div className="flex gap-4">
             <span>Pagamentos seguros</span>
-            <span>•</span>
+            <span>â€¢</span>
             <span>Envios para toda a Europa</span>
           </div>
         </div>
@@ -64,3 +64,4 @@ export default function Footer() {
     </footer>
   )
 }
+
