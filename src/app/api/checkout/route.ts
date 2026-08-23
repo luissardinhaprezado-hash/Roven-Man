@@ -18,9 +18,7 @@ export async function POST(req: NextRequest) {
     }
 
     const stripe = new Stripe(stripeSecretKey, {
-      apiVersion: "2024-11-20.acacia",
-    })
-
+   
     const line_items = items.map((item: any) => ({
       price_data: {
         currency: "eur",
