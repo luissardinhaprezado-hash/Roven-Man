@@ -35,7 +35,7 @@ export default function Footer() {
 
           <div>
             <h4 className="font-semibold mb-4 text-sm tracking-wider">NEWSLETTER</h4>
-            <p className="text-zinc-400 text-sm mb-3">Recebe 10% na primeira compra</p>
+            <p className="text-zinc-400 text-sm mb-3">Recebe novidades e lançamentos da ROVEN MAN.</p>
             <form className="flex gap-2">
               <input
                 type="email"

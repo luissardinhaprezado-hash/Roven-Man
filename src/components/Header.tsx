@@ -6,14 +6,15 @@ import { useCart } from "@/store/cart"
 import { useState } from "react"
 
 export default function Header() {
-  const totalItems = useCart((s) => s.totalItems())
+  const totalItems = useCart((s) => s.totalItems)
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
     <header className="sticky top-0 z-50 bg-black/95 backdrop-blur border-b border-zinc-800">
       {/* Top bar */}
-      <div className="bg-zinc-900 text-xs text-center py-2 tracking-wider text-zinc-300">
-        ENVIOS GRÁTIS A PARTIR DE 80€ • ENTREGA EM 2-4 DIAS • PAGAMENTOS SEGUROS
+           <div className="bg-zinc-900 text-xs text-center py-2 tracking-wider text-zinc-300">
+        <div>Bem-vindo à ROVEN MAN</div>
+        <div>ENVIOS GRÁTIS A PARTIR DE 80€ • ENTREGA EM 2 SEMANAS • PAGAMENTOS SEGUROS</div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
