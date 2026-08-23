@@ -17,7 +17,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Carrinho vazio" }, { status: 400 })
     }
 
-    const stripe = new Stripe(stripeSecretKey)
+    const stripe = new Stripe(stripeSecretKey, {
+      apiVersion: "2024-11-20.acacia",
+    })
 
     const line_items = items.map((item: any) => ({
       price_data: {

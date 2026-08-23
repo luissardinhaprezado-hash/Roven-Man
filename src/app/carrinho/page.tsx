@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useCart } from "@/store/cart"
 
 export default function CartPage() {
-  const { items, removeItem, updateQuantity, totalPrice, totalShipping, clearCart } = useCart()
+  const { items, removeItem, updateQuantity, totalPrice, clearCart } = useCart()
 
   if (items.length === 0) {
     return (
@@ -94,12 +94,12 @@ export default function CartPage() {
           </div>
           <div className="flex justify-between mb-4 text-sm">
             <span className="text-zinc-400">Envio</span>
-           <span>{totalShipping() === 0 ? "Grátis" : "€" + totalShipping().toFixed(2)}</span>
+            <span>{totalPrice() >= 80 ? "Grátis" : "€4.90"}</span>
           </div>
           <div className="border-t border-zinc-800 pt-4 flex justify-between font-semibold text-lg">
             <span>Total</span>
             <span>
-              €{(totalPrice() + totalShipping()).toFixed(2)}
+              €{(totalPrice() + (totalPrice() >= 80 ? 0 : 4.9)).toFixed(2)}
             </span>
           </div>
           <Link

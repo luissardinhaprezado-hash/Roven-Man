@@ -15,16 +15,16 @@ export type Product = {
 export const products: Product[] = [
   {
     id: "1",
-    name: "Hoodie Masculino Estilo Streetwear",
-    price: 18.20,
-    originalPrice: 21.35,
-    category: "Hoodies",
-    image: "https://ae-pic-a1.aliexpress-media.com/kf/Scbf6a57e5c9345f5a3c105f60b4770ecF.jpg_220x220q75.jpg_.avif",
-    description: "Hoodie masculino estilo streetwear para outono e inverno Este hoodie casual é perfeito para o clima de outono e inverno.",
+    name: "Camisa Oversized Bege",
+    price: 49.90,
+    originalPrice: 79.90,
+    category: "Camisas",
+    image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&h=800&fit=crop",
+    description: "Camisa oversized em algodão premium. Corte moderno e confortável para o dia a dia.",
     sizes: ["S", "M", "L", "XL"],
-    colors: ["Rosa", "Amarelo", "Marrom"],
+    colors: ["Bege", "Branco", "Preto"],
     inStock: true,
-    shipping: 14.55,
+    featured: true
   },
   {
     id: "2",

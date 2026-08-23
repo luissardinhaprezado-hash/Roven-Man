@@ -7,7 +7,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 export default function CheckoutPage() {
-  const { items, totalPrice, totalShipping, clearCart } = useCart()
+  const { items, totalPrice, clearCart } = useCart()
   const { stripe } = useAdmin()
   const router = useRouter()
   const [loading, setLoading] = useState(false)
@@ -78,7 +78,7 @@ export default function CheckoutPage() {
     }
   }
 
-  const shipping = totalShipping()
+  const shipping = totalPrice() >= 80 ? 0 : 4.9
   const total = totalPrice() + shipping
 
   return (

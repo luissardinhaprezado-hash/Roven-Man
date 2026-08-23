@@ -65,16 +65,12 @@ export const useCart = create<CartStore>()(
         }))
       },
       clearCart: () => set({ items: [] }),
-                 totalPrice: () => 
+      totalItems: () => get().items.reduce((acc, i) => acc + i.quantity, 0),
+      totalPrice: () =>
         get().items.reduce((acc, i) => acc + i.product.price * i.quantity, 0),
-      totalShipping: () =>
-        get().items.reduce(
-          (acc, i) => acc + (i.product.shipping ?? 0) * i.quantity,
-          0
-        ),
     }),
     {
       name: "roven-man-cart",
     }
   )
-)    
+)
