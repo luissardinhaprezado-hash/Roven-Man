@@ -29,7 +29,7 @@ export default function Footer() {
               <li><Link href="/envios" className="hover:text-white transition">Envios e devoluÃ§Ãµes</Link></li>
               <li><Link href="/contacto" className="hover:text-white transition">Contacto</Link></li>
               <li><Link href="/faq" className="hover:text-white transition">FAQ</Link></li>
-              <li><Link href="/admin" className="hover:text-white transition">Admin</Link></li>
+
             </ul>
           </div>
 
