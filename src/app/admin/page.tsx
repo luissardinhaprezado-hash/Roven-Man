@@ -105,14 +105,14 @@ export default function AdminPage() {
                 <div className="space-y-3">
                   {orders.map((o) => (
                     <div key={o.id} className="border border-zinc-800 p-4 rounded text-sm">
-                      <p className="font-medium">{o.id} Ã¢â‚¬â€ {o.status}</p>
-                      <p className="text-zinc-400">{o.customer?.name} Ã‚Â· {o.customer?.email}</p>
+                      <p className="font-medium">{o.id} — {o.status}</p>
+                      <p className="text-zinc-400">{o.customer?.name} · {o.customer?.email}</p>
                       <div className="flex gap-2 mt-2 flex-wrap">
                         {["novo", "pago", "enviado", "cancelado"].map((s) => (
                           <button
                             key={s}
                             type="button"
-                            onClick={() => updateStatus(o.id, s)}
+                            onClick={() => updateStatus(o.id, s as any)}
                             className="border border-zinc-700 px-2 py-1 text-xs rounded"
                           >
                             {s}
