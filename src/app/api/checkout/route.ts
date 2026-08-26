@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
 
     if (!stripeSecretKey) {
       return NextResponse.json(
-        { error: "Stripe Secret Key nao configurada." },
+        { error: "Stripe Secret Key não configurada. Vai ao Admin → Pagamentos." },
         { status: 400 }
       )
     }
@@ -17,14 +17,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Carrinho vazio" }, { status: 400 })
     }
 
-    const stripe = new Stripe(stripeSecretKey)
+    const stripe = new Stripe(stripeSecretKey, {
+      apiVersion: "2024-11-20.acacia",
+    })
 
     const line_items = items.map((item: any) => ({
       price_data: {
         currency: "eur",
         product_data: {
           name: item.product.name,
-          description: "Tamanho: " + item.size + " | Cor: " + item.color,
+          description: `Tamanho: ${item.size} | Cor: ${item.color}`,
           images: item.product.image ? [item.product.image] : [],
         },
         unit_amount: Math.round(item.product.price * 100),
@@ -32,18 +34,19 @@ export async function POST(req: NextRequest) {
       quantity: item.quantity,
     }))
 
-    const shippingTotal = items.reduce(
-      (acc: number, i: any) =>
-        acc + (Number(i.product.shipping) || 0) * i.quantity,
+    // Add shipping if under 80€
+    const subtotal = items.reduce(
+      (acc: number, i: any) => acc + i.product.price * i.quantity,
       0
     )
-
-    if (shippingTotal > 0) {
+    if (subtotal < 80) {
       line_items.push({
         price_data: {
           currency: "eur",
-          product_data: { name: "Envio" },
-          unit_amount: Math.round(shippingTotal * 100),
+          product_data: {
+            name: "Envio",
+          },
+          unit_amount: 490,
         },
         quantity: 1,
       })
@@ -56,8 +59,8 @@ export async function POST(req: NextRequest) {
       payment_method_types: ["card"],
       line_items,
       customer_email: customer?.email,
-      success_url: origin + "/sucesso?session_id={CHECKOUT_SESSION_ID}",
-      cancel_url: origin + "/carrinho",
+      success_url: `${origin}/sucesso?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}/carrinho`,
       metadata: {
         customer_name: customer?.name || "",
         customer_phone: customer?.phone || "",
@@ -65,13 +68,16 @@ export async function POST(req: NextRequest) {
         customer_city: customer?.city || "",
         customer_postal: customer?.postal || "",
       },
+      shipping_address_collection: {
+        allowed_countries: ["PT", "ES", "FR", "DE", "IT", "BE", "NL", "LU"],
+      },
     })
 
     return NextResponse.json({ url: session.url, id: session.id })
   } catch (err: any) {
     console.error("Stripe error:", err)
     return NextResponse.json(
-      { error: err.message || "Erro no pagamento" },
+      { error: err.message || "Erro ao criar sessão de pagamento" },
       { status: 500 }
     )
   }

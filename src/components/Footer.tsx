@@ -1,7 +1,4 @@
-﻿"use client"
-
 import Link from "next/link"
-import { Instagram } from "lucide-react"
 
 export default function Footer() {
   return (
@@ -13,17 +10,8 @@ export default function Footer() {
               ROVEN <span className="text-amber-500">MAN</span>
             </h3>
             <p className="text-zinc-400 text-sm leading-relaxed">
-              Moda masculina premium com estilo contemporaneo. Qualidade, conforto e design pensados para o homem moderno.
+              Moda masculina premium com estilo contemporâneo. Qualidade, conforto e design pensados para o homem moderno.
             </p>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 mt-4 text-sm text-zinc-400 hover:text-amber-500 transition"
-            >
-              <Instagram size={20} />
-              <span>Instagram</span>
-            </a>
           </div>
 
           <div>
@@ -31,31 +19,33 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-zinc-400">
               <li><Link href="/produtos" className="hover:text-white transition">Todos os produtos</Link></li>
               <li><Link href="/produtos?sale=1" className="hover:text-white transition">Saldos</Link></li>
-              <li><Link href="/produtos" className="hover:text-white transition">Novidades</Link></li>
+              <li><Link href="/produtos?cat=Novidades" className="hover:text-white transition">Novidades</Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-semibold mb-4 text-sm tracking-wider">AJUDA</h4>
             <ul className="space-y-2 text-sm text-zinc-400">
-              <li><Link href="/envios" className="hover:text-white transition">Envios e devolucoes</Link></li>
+              <li><Link href="/envios" className="hover:text-white transition">Envios e devoluções</Link></li>
               <li><Link href="/contacto" className="hover:text-white transition">Contacto</Link></li>
               <li><Link href="/faq" className="hover:text-white transition">FAQ</Link></li>
+              <li><Link href="/admin" className="hover:text-white transition">Admin</Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-semibold mb-4 text-sm tracking-wider">NEWSLETTER</h4>
-            <p className="text-zinc-400 text-sm mb-3">
-              Recebe novidades e lancamentos da ROVEN MAN.
-            </p>
-            <form className="flex gap-2" onSubmit={(e) => e.preventDefault()}>
+            <p className="text-zinc-400 text-sm mb-3">Recebe 10% na primeira compra</p>
+            <form className="flex gap-2">
               <input
                 type="email"
                 placeholder="O teu email"
                 className="bg-zinc-900 border border-zinc-700 px-3 py-2 text-sm flex-1 rounded focus:outline-none focus:border-amber-500"
               />
-              <button type="submit" className="bg-amber-500 text-black px-4 py-2 text-sm font-semibold rounded hover:bg-amber-400 transition">
+              <button
+                type="submit"
+                className="bg-amber-500 text-black px-4 py-2 text-sm font-semibold rounded hover:bg-amber-400 transition"
+              >
                 OK
               </button>
             </form>
@@ -63,13 +53,10 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-zinc-800 mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-zinc-500">
-          <p>(c) 2026 ROVEN MAN. Todos os direitos reservados.</p>
-          <div className="flex gap-4 items-center">
-            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-amber-500 transition">
-              <Instagram size={16} />
-            </a>
+          <p>© 2026 ROVEN MAN. Todos os direitos reservados.</p>
+          <div className="flex gap-4">
             <span>Pagamentos seguros</span>
-            <span>-</span>
+            <span>•</span>
             <span>Envios para toda a Europa</span>
           </div>
         </div>
