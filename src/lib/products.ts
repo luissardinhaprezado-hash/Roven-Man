@@ -115,6 +115,7 @@ export const products: Product[] = [
 
 export const categories = [
   "Tudo",
+  "Ternos",
   "Camisas",
   "T-Shirts",
   "Calças",
