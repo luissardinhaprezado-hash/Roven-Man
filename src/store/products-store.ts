@@ -1,21 +1,9 @@
-﻿"use client"
+"use client"
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
-import { products as defaultProducts, Product } from "@/lib/products"
+import { products as defaultProducts } from "@/lib/products"
 
-type ProductsStore = {
-  items: Product[]
-  hydrated: boolean
-  setHydrated: (v: boolean) => void
-  setItems: (items: Product[]) => void
-  addProduct: (p: Product) => void
-  updateProduct: (id: string, data: Partial<Product>) => void
-  removeProduct: (id: string) => void
-  loadFromServer: () => Promise<void>
-  saveToServer: () => Promise<{ ok: boolean; persisted: boolean; message?: string }>
-}
-
-export const useProducts = create<ProductsStore>()(
+export const useProducts = create(
   persist(
     (set, get) => ({
       items: defaultProducts,
@@ -23,15 +11,14 @@ export const useProducts = create<ProductsStore>()(
       setHydrated: (v) => set({ hydrated: v }),
       setItems: (items) => set({ items }),
       addProduct: (p) => set({ items: [...get().items, p] }),
-      updateProduct: (id, data) =>
-        set({ items: get().items.map((x) => (x.id === id ? { ...x, ...data } : x)) }),
+      updateProduct: (id, data) => set({ items: get().items.map((x) => (x.id === id ? { ...x, ...data } : x)) }),
       removeProduct: (id) => set({ items: get().items.filter((x) => x.id !== id) }),
       loadFromServer: async () => {
         try {
-          const res = await fetch("/api/products", { cache: "no-store" })
+          const res = await fetch("/api/products?t=" + Date.now(), { cache: "no-store" })
           if (!res.ok) return
           const data = await res.json()
-          if (Array.isArray(data) && data.length > 0) set({ items: data })
+          if (Array.isArray(data)) set({ items: data })
         } catch {}
       },
       saveToServer: async () => {
@@ -41,15 +28,20 @@ export const useProducts = create<ProductsStore>()(
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ password: "roven2026", items: get().items }),
           })
-          const data = await res.json()
-          if (!res.ok) return { ok: false, persisted: false, message: data.error || "Erro" }
-          return { ok: true, persisted: !!data.persisted, message: data.message }
-        } catch (e: any) {
-          return { ok: false, persisted: false, message: e.message }
+          const data = await res.json().catch(() => ({}))
+          if (!res.ok) return { ok: false, persisted: false, message: data.error || data.message || ("Erro " + res.status) }
+          return { ok: true, persisted: true, message: data.message || "ok" }
+        } catch (e) {
+          return { ok: false, persisted: false, message: (e && e.message) || "Sem rede" }
         }
       },
     }),
-    { name: "roven-man-products", onRehydrateStorage: () => (s) => s?.setHydrated(true) }
+    {
+      name: "roven-man-products",
+      onRehydrateStorage: () => (state) => {
+        state && state.setHydrated(true)
+        setTimeout(() => state && state.loadFromServer(), 50)
+      },
+    }
   )
 )
-export type { Product }

@@ -21,8 +21,8 @@ export async function POST(req: NextRequest) {
     if (!result.ok) {
       return NextResponse.json({ error: result.message, ...result }, { status: 500 })
     }
-    return NextResponse.json({ ok: true, persisted: true, storage: result.storage, count: body.items.length })
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message || "Erro" }, { status: 500 })
+    return NextResponse.json({ ok: true, persisted: true, storage: result.storage, message: result.message, count: body.items.length })
+  } catch (e) {
+    return NextResponse.json({ error: (e && e.message) || "Erro" }, { status: 500 })
   }
 }
