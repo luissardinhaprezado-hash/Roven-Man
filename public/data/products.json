@@ -1,0 +1,25 @@
+[
+  {
+    "id": "1",
+    "name": "Camisa Oversized Bege",
+    "price": 49.9,
+    "originalPrice": 79.9,
+    "category": "Camisas",
+    "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&h=800&fit=crop",
+    "description": "Camisa oversized em algodao premium.",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      "Bege",
+      "Branco",
+      "Preto"
+    ],
+    "inStock": true,
+    "featured": true,
+    "shipping": 0
+  }
+]
